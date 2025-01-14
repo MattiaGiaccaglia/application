@@ -17,21 +17,25 @@ export class HomeComponent implements OnInit {
     const table = this.tables[index];
 
     if (table.isClosed) {
-      // Mostra un'alert per confermare la riapertura
       const confirmation = confirm('Vuoi riaprire il tavolo?');
       if (confirmation) {
-        // Riapre il tavolo
         this.tables[index].isClosed = false;
         localStorage.setItem('tables', JSON.stringify(this.tables));
       }
     } else {
-      // Mostra un'alert per confermare la chiusura
       const confirmation = confirm('Vuoi chiudere il conto del tavolo?');
       if (confirmation) {
-        // Chiude il tavolo
         this.tables[index].isClosed = true;
         localStorage.setItem('tables', JSON.stringify(this.tables));
       }
+    }
+  }
+
+  removeAllTables() {
+    const confirmation = confirm('Sei sicuro di voler rimuovere tutti i tavoli?');
+    if (confirmation) {
+      this.tables = [];
+      localStorage.removeItem('tables'); // Rimuove tutti i tavoli dal localStorage
     }
   }
 }

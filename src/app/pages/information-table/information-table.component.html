@@ -1,7 +1,9 @@
 <div class="container">
   <!-- Header con logo -->
   <div class="header">
-    <img src="assets/images/logo.png" alt="Lanari Logo" class="logo" />
+    <a routerLink="/">
+      <img src="/assets/images/logo.png" alt="Lanari Logo" class="logo" />
+    </a>
   </div>
   
     <h2>TAVOLO DI {{ table.name }}</h2>
@@ -13,15 +15,17 @@
     <!-- Aggiungi bottiglia di vino -->
     <div class="section">
       <h3>AGGIUNGI BOTTIGLIA DI VINO</h3>
-      <div class="counter">
-        <button (click)="decreaseBottles()" [disabled]="isClosed">-</button>
-        <span>{{ bottles }}</span>
-        <button (click)="increaseBottles()" [disabled]="isClosed">+</button>
+      <div *ngFor="let wine of wines; let i = index" class="wine-row">
+        <span class="wine-name">{{ wine.name }}</span>
+        <div class="counter">
+          <button (click)="decreaseWineQuantity(i)" [disabled]="isClosed">-</button>
+          <span>{{ wine.quantity }}</span>
+          <button (click)="increaseWineQuantity(i)" [disabled]="isClosed">+</button>
+        </div>
       </div>
-      <select [(ngModel)]="selectedBottle" [disabled]="isClosed" (change)="updateTotal()">
-        <option *ngFor="let wine of wines" [value]="wine">{{ wine }}</option>
-      </select>
     </div>
+    
+    
   
     <!-- Aggiungi calice di vino -->
     <div class="section">

@@ -1,47 +1,43 @@
 <div class="container">
   <!-- Header con logo -->
   <div class="header">
-    <img src="assets/images/logo.png" alt="Lanari Logo" class="logo" />
+    <a routerLink="/">
+      <img src="/assets/images/logo.png" alt="Lanari Logo" class="logo" />
+    </a>
   </div>
+  
 
   <!-- Se non ci sono tavoli -->
   <div *ngIf="tables.length === 0" class="empty-state">
     <h2>Nessun Tavolo Presente</h2>
     <button class="add-button" routerLink="/add-table">
-      <span>+</span> Aggiungi
+      <span>+</span> Aggiungi Tavolo
     </button>
   </div>
 
   <!-- Se ci sono tavoli -->
   <div *ngIf="tables.length > 0" class="tables-list">
-    <h2>Tavoli Presenti</h2>
-    <div class="tables-list">
-      <div class="table" *ngFor="let table of tables; let i = index">
-        <div class="table-info">
-          <!-- Cerchio: cambia colore se il tavolo è chiuso -->
-          <div 
-            class="circle" 
-            [ngClass]="{ 'closed': table.isClosed }" 
-            routerLink="/table/{{ i }}">
-            {{ i + 1 }}
-          </div>
-          <div class="details" routerLink="/table/{{ i }}">
-            <p><strong>{{ table.name }}</strong></p>
-            <p>{{ table.people }} persone</p>
-            <p>{{ table.totalAmount ? table.totalAmount.toFixed(2) : 0 }} euro</p>
-          </div>
+    <h2>TAVOLI PRESENTI</h2>
+    <div class="table" *ngFor="let table of tables; let i = index">
+      <div class="table-info">
+        <div class="circle" [ngClass]="{ 'closed': table.isClosed }" routerLink="/table/{{ i }}">
+          {{ i + 1 }}
         </div>
-        <!-- Pulsante per chiudere o riaprire il tavolo -->
-        <button 
-          class="delete-button" 
-          (click)="toggleTableState(i)">
-          &#10006;
-        </button>
+        <div class="details" routerLink="/table/{{ i }}">
+          <p><strong>{{ table.name }}</strong></p>
+          <p>{{ table.people }} persone</p>
+          <p>{{ table.totalAmount ? table.totalAmount.toFixed(2) : 0 }} euro</p>
+        </div>
       </div>
+      <button class="delete-button" (click)="toggleTableState(i)">&#10006;</button>
     </div>
-  </div>  
-    <!-- Pulsante per aggiungere un nuovo tavolo -->
+
+    <!-- Pulsanti sotto la lista dei tavoli -->
     <button class="add-button" routerLink="/add-table">
-      <span>+</span> Aggiungi un altro tavolo
+      <span>+</span> Aggiungi Tavolo
+    </button>
+    <button class="remove-all-button" (click)="removeAllTables()">
+      Rimuovi Tutti i Tavoli
     </button>
   </div>
+</div>

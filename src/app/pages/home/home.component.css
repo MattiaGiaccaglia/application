@@ -13,9 +13,9 @@
     height: 50px;
   }
   
-  .empty-state h2 {
-    margin-top: 20px;
-    color: #5e4637;
+  .empty-state {
+    margin-top: 150px; /* Aumenta il margine superiore */
+    text-align: center;
   }
   
   .add-button {
@@ -33,6 +33,25 @@
     font-size: 20px;
     margin-right: 5px;
   }
+  
+  .remove-all-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #b33939; /* Rosso per enfatizzare la rimozione */
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+  
+  .remove-all-button:hover {
+    background-color: #e74c3c; /* Cambia colore al passaggio del mouse */
+  }  
   
   .tables-list h2 {
     margin-top: 20px;

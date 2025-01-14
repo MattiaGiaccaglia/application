@@ -5,14 +5,14 @@ import { AddingTableComponent } from './pages/adding-table/adding-table.componen
 import { InformationTableComponent } from './pages/information-table/information-table.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }, // Rotta principale (home)
-  { path: 'add-table', component: AddingTableComponent }, // Rotta per aggiungere un tavolo
-  { path: 'table/:id', component: InformationTableComponent }, // Rotta per le informazioni del tavolo
-  { path: '**', redirectTo: '' } // Rotta di fallback
+  { path: '', component: HomeComponent }, // Rotta per la home
+  { path: 'add-table', component: AddingTableComponent },
+  { path: 'table/:id', component: InformationTableComponent },
+  { path: '**', redirectTo: '' } // Reindirizza le rotte sconosciute alla home
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

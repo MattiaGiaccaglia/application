@@ -9,13 +9,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class InformationTableComponent implements OnInit {
   tableIndex!: number;
   table: any;
-  bottles: number = 0;
   glasses: number = 0;
   afterDinner: number = 0;
-  selectedBottle: string = '';
-  wines: string[] = ['ROSSO CONERO', 'FIBBIO', 'SOLOSARA', 'LA FLEUR', 'COLLEBOLLE', 'ACQUA'];
   totalAmount: number = 0;
   isClosed: boolean = false;
+
+  // Bottiglie di vino e quantità
+  wines: { name: string; price: number; quantity: number }[] = [
+    { name: 'ROSSO CONERO', price: 8, quantity: 0 },
+    { name: 'FIBBIO', price: 12.5, quantity: 0 },
+    { name: 'SOLOSARA', price: 8, quantity: 0 },
+    { name: 'LA FLEUR', price: 8, quantity: 0 },
+    { name: 'COLLEBOLLE', price: 8, quantity: 0 },
+    { name: 'ACQUA', price: 1, quantity: 0 }
+  ];
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -24,36 +31,66 @@ export class InformationTableComponent implements OnInit {
       this.tableIndex = +params['id'];
       const tables = JSON.parse(localStorage.getItem('tables') || '[]');
       this.table = tables[this.tableIndex];
-
-      // Carica i dati del tavolo
-      this.bottles = this.table.bottles || 0;
+      this.isClosed = this.table.isClosed || false;
       this.glasses = this.table.glasses || 0;
       this.afterDinner = this.table.afterDinner || 0;
-      this.selectedBottle = this.table.selectedBottle || '';
-      this.totalAmount = this.table.totalAmount || 0;
-      this.isClosed = this.table.isClosed || false; // Verifica se il tavolo è chiuso
+
+      // Carica i dati del vino
+      if (this.table.wines) {
+        this.wines = this.table.wines;
+      }
     });
-  }
 
-  // Disabilita tutte le modifiche se il tavolo è chiuso
-  increaseBottles() {
-    if (!this.isClosed) this.bottles++;
     this.updateTotal();
   }
 
-  decreaseBottles() {
-    if (!this.isClosed && this.bottles > 0) this.bottles--;
-    this.updateTotal();
+  increaseWineQuantity(index: number) {
+    if (!this.isClosed) {
+      this.wines[index].quantity++;
+      this.updateTotal();
+    }
+  }
+
+  decreaseWineQuantity(index: number) {
+    if (!this.isClosed && this.wines[index].quantity > 0) {
+      this.wines[index].quantity--;
+      this.updateTotal();
+    }
   }
 
   increaseGlasses() {
-    if (!this.isClosed) this.glasses++;
-    this.updateTotal();
+    if (!this.isClosed) {
+      this.glasses++;
+      this.updateTotal();
+    }
   }
 
   decreaseGlasses() {
-    if (!this.isClosed && this.glasses > 0) this.glasses--;
-    this.updateTotal();
+    if (!this.isClosed && this.glasses > 0) {
+      this.glasses--;
+      this.updateTotal();
+    }
+  }
+
+  updateTotal() {
+    const wineTotal = this.wines.reduce((sum, wine) => sum + wine.price * wine.quantity, 0);
+    const glassesTotal = this.glasses * 5;
+    this.totalAmount = wineTotal + glassesTotal;
+  }
+
+  saveChanges() {
+    if (this.isClosed) return;
+
+    const tables = JSON.parse(localStorage.getItem('tables') || '[]');
+    tables[this.tableIndex] = {
+      ...this.table,
+      glasses: this.glasses,
+      afterDinner: this.afterDinner,
+      wines: this.wines,
+      totalAmount: this.totalAmount
+    };
+    localStorage.setItem('tables', JSON.stringify(tables));
+    this.router.navigate(['/']);
   }
 
   increaseAfterDinner() {
@@ -64,47 +101,4 @@ export class InformationTableComponent implements OnInit {
     if (!this.isClosed && this.afterDinner > 0) this.afterDinner--;
   }
 
-  updateTotal() {
-    if (this.isClosed) return;
-
-    // Calcola il costo delle bottiglie
-    let bottleCost = 0;
-    switch (this.selectedBottle) {
-      case 'ROSSO CONERO':
-      case 'SOLOSARA':
-      case 'LA FLEUR':
-      case 'COLLEBOLLE':
-        bottleCost = 8;
-        break;
-      case 'FIBBIO':
-        bottleCost = 12.5;
-        break;
-      case 'ACQUA':
-        bottleCost = 1;
-        break;
-    }
-    const bottlesTotal = this.bottles * bottleCost;
-
-    // Calcola il costo dei calici
-    const glassesTotal = this.glasses * 5;
-
-    // Aggiorna il totale
-    this.totalAmount = bottlesTotal + glassesTotal;
-  }
-
-  saveChanges() {
-    if (this.isClosed) return; // Non salva i dati se il tavolo è chiuso
-
-    const tables = JSON.parse(localStorage.getItem('tables') || '[]');
-    tables[this.tableIndex] = {
-      ...this.table,
-      bottles: this.bottles,
-      glasses: this.glasses,
-      afterDinner: this.afterDinner,
-      selectedBottle: this.selectedBottle,
-      totalAmount: this.totalAmount
-    };
-    localStorage.setItem('tables', JSON.stringify(tables));
-    this.router.navigate(['/']);
-  }
 }

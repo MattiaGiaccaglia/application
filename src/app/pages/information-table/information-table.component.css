@@ -126,4 +126,52 @@
     color: #5e4637;
   }
   
+  .section {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .wine-row {
+    display: flex;
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center;    /* Centra verticalmente */
+    gap: 20px;              /* Distanza tra gli elementi */
+    margin: 10px 0;
+  }
+  
+  .wine-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #5e4637;
+    text-align: left; /* Allinea il testo a sinistra */
+    min-width: 120px; /* Larghezza minima per mantenere un layout uniforme */
+  }
+  
+  .counter {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .counter button {
+    background-color: #dcb8a7;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .counter span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #5e4637;
+    min-width: 30px; /* Mantiene una dimensione minima per l'allineamento */
+    text-align: center;
+  }
+
+  
+  
+  
   
