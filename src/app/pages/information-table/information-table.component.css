@@ -1,0 +1,129 @@
+.container {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #faefe9;
+    height: 100vh;
+  }
+  
+  .header {
+    background-color: #b09a90;
+    padding: 20px;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+  
+  .table-info {
+    margin: 20px 0;
+  }
+  
+  .circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #b09a90;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin: 0 auto;
+  }
+  
+  .section {
+    margin: 20px 0;
+  }
+  
+  .counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .counter button {
+    background-color: #dcb8a7;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .counter span {
+    font-size: 18px;
+    color: #5e4637;
+  }
+  
+  .input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #dcb8a7;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .save-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #dcb8a7;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .section {
+    margin: 20px 0;
+  }
+  
+  .counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .counter button {
+    background-color: #dcb8a7;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .counter span {
+    font-size: 18px;
+    color: #5e4637;
+  }
+  
+  .input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #dcb8a7;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .save-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #dcb8a7;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  p {
+    font-size: 18px;
+    color: #5e4637;
+  }
+  
+  

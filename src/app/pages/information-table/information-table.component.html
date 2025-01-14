@@ -1,0 +1,60 @@
+<div class="container">
+  <!-- Header con logo -->
+  <div class="header">
+    <img src="assets/images/logo.png" alt="Lanari Logo" class="logo" />
+  </div>
+  
+    <h2>TAVOLO DI {{ table.name }}</h2>
+  
+    <div class="table-info">
+      <div class="circle">{{ tableIndex + 1 }}</div>
+    </div>
+  
+    <!-- Aggiungi bottiglia di vino -->
+    <div class="section">
+      <h3>AGGIUNGI BOTTIGLIA DI VINO</h3>
+      <div class="counter">
+        <button (click)="decreaseBottles()" [disabled]="isClosed">-</button>
+        <span>{{ bottles }}</span>
+        <button (click)="increaseBottles()" [disabled]="isClosed">+</button>
+      </div>
+      <select [(ngModel)]="selectedBottle" [disabled]="isClosed" (change)="updateTotal()">
+        <option *ngFor="let wine of wines" [value]="wine">{{ wine }}</option>
+      </select>
+    </div>
+  
+    <!-- Aggiungi calice di vino -->
+    <div class="section">
+      <h3>AGGIUNGI CALICE DI VINO</h3>
+      <div class="counter">
+        <button (click)="decreaseGlasses()" [disabled]="isClosed">-</button>
+        <span>{{ glasses }}</span>
+        <button (click)="increaseGlasses()" [disabled]="isClosed">+</button>
+      </div>
+    </div>
+  
+    <!-- Modifica numero partecipanti -->
+    <div class="section">
+      <h3>MODIFICA NUMERO PARTECIPANTI</h3>
+      <input type="number" [(ngModel)]="table.people" class="input" [disabled]="isClosed" />
+    </div>
+  
+    <!-- Persone post-cena -->
+    <div class="section">
+      <h3>PERSONE POST-CENA</h3>
+      <div class="counter">
+        <button (click)="decreaseAfterDinner()" [disabled]="isClosed">-</button>
+        <span>{{ afterDinner }}</span>
+        <button (click)="increaseAfterDinner()" [disabled]="isClosed">+</button>
+      </div>
+    </div>
+  
+    <!-- Mostra il totale -->
+    <div class="section">
+      <h3>TOTALE CONTO</h3>
+      <p>{{ totalAmount.toFixed(2) }} €</p>
+    </div>
+  
+    <button (click)="saveChanges()" class="save-button" [disabled]="isClosed">SALVA</button>
+  </div>
+  

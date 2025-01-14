@@ -1,0 +1,35 @@
+<div class="container">
+    <!-- Header con logo -->
+    <div class="header">
+      <img src="assets/images/logo.png" alt="Lanari Logo" class="logo" />
+    </div>
+  
+    <!-- Form per aggiungere il tavolo -->
+    <form (ngSubmit)="addTable()" class="form">
+      <label for="name">INSERISCI NOME DEL TAVOLO:</label>
+      <input
+        type="text"
+        id="name"
+        [(ngModel)]="tableName"
+        name="name"
+        required
+        class="input"
+      />
+  
+      <label for="people">INSERISCI NUMERO PERSONE:</label>
+      <input
+        type="number"
+        id="people"
+        [(ngModel)]="tablePeople"
+        name="people"
+        required
+        min="1"
+        class="input"
+      />
+  
+      <button type="submit" class="add-button">
+        <span>+</span> Aggiungi
+      </button>
+    </form>
+  </div>
+  
